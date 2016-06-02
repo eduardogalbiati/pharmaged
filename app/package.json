@@ -1,0 +1,9 @@
+{
+  "name": "PharmaGed",
+  "version": "2.8",
+  "description": "Gerenciador Eletrônico de Documentos",
+  "main": "main.js",
+  "dependencies": {
+    "mysql": "2.9.0"
+  }
+}

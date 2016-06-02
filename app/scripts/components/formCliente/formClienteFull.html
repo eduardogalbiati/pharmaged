@@ -1,0 +1,78 @@
+<form name="userForm" class="padding-medium input-uppercase">
+    <md-input-container class="md-block" flex>
+        <label>Nome</label>
+        <input next-on-enter="telefone1" remove-acento id="nomeCliente" name="nomeCliente" ng-model="_ctrl.scope.clienteSelected.nomeCliente" type="text" ng-blur="checkIfHaveToLoad('nomeCliente');update('nomeCliente');" next-on-enter="tel1" >
+       <div>
+       </div>
+    </md-input-container>
+    <div layout layout-sm="column">
+        <md-input-container flex>
+            <label>Telefone</label>
+            <input next-on-enter="celular1" id="telefone1" name="telefone1" ui-mask="99 - 99999-999?9" ui-mask-placeholder-char="_" class="remove-placeholder" name="tel1" id="tel" ng-model="_ctrl.scope.clienteSelected.tel" type="text" ng-blur="update('tel')">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Celular 1</label>
+            <input next-on-enter="celular2" id="celular1" name="celular1" ui-mask="99 - 99999-999?9" ui-mask-placeholder-char="_" class="remove-placeholder" ng-model="_ctrl.scope.clienteSelected.cel1" type="text" ng-blur="update('cel1')">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Celular 2</label>
+            <input next-on-enter="cpf" id="celular2" name="celular2" ui-mask="99 - 99999-999?9" ui-mask-placeholder-char="_" class="remove-placeholder" ng-model="_ctrl.scope.clienteSelected.cel2" type="text" ng-blur="update('cel2')">
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+        <md-input-container flex>
+            <label>CPF</label>
+            <input next-on-enter="rg" id="cpf" name="cpf" ui-mask="999.999.999-99" ui-mask-placeholder-char="_" class="remove-placeholder" ng-model="_ctrl.scope.clienteSelected.cpf" type="text" ng-blur="update('cpf')">
+        </md-input-container>
+        <md-input-container flex>
+            <label>RG</label>
+            <input next-on-enter="dtNascimento" id="rg" name="rg" ng-model="_ctrl.scope.clienteSelected.rg" type="text" ng-blur="update('rg')">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Nascimento</label>
+            <input next-on-enter="email" id="dtNascimento" name="dtNascimento" ng-model="_ctrl.scope.clienteSelected.dataNascimento" type="date" ng-blur="update('dataNascimento')">
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+        <md-input-container flex>
+            <label>Email</label>
+            <input next-on-enter="cep" id="email" name="email" remove-acento ng-model="_ctrl.scope.clienteSelected.email" type="text" ng-blur="update('email')">
+        </md-input-container>
+        <md-input-container>
+            <label>Cep</label>
+            <input next-on-enter="endereco" id="cep" name="cep" ng-model="_ctrl.scope.clienteSelected.cep" type="text" ng-blur="update('cep')">
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+        <md-input-container class="md-block" flex>
+            <label>Endereço</label>
+            <input next-on-enter="bairro" id="endereco" name="endereco" remove-acento ng-model="_ctrl.scope.clienteSelected.endereco" type="text" ng-blur="update('endereco')">
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+        <md-input-container flex>
+            <label>Bairro</label>
+            <input next-on-enter="cidade" id="bairro" name="bairro" ng-model="_ctrl.scope.clienteSelected.bairro" type="text" ng-blur="update('bairro')">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Cidade</label>
+            <input next-on-enter="estado" id="cidade" name="cidade" ng-model="_ctrl.scope.clienteSelected.cidade" type="text" ng-blur="update('cidade')">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Estado</label>
+            <input next-on-enter="atualizarDados" id="estado" name="estado" ng-model="_ctrl.scope.clienteSelected.uf" type="text" ng-blur="update('uf')">
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+        <md-input-container flex>
+            <md-checkbox next-on-enter="solicitarReceita" id="atualizarDados" name="atualizarDados" ng-true-value="'1'" ng-false-value="'0'" ng-model="_ctrl.scope.clienteSelected.atualizarDados" ng-change="update('atualizarDados')">Atualizar dados?</md-checkbox>
+        </md-input-container>
+        <md-input-container md-no-float>
+            <md-checkbox next-on-enter="observacoes" id="solicitarReceita" name="solicitarReceita" ng-true-value="'1'" ng-false-value="'0'" ng-model="_ctrl.scope.clienteSelected.solicitarReceita" ng-change="update('solicitarReceita')">Solicitar receita?</md-checkbox>
+        </md-input-container>
+    </div>
+    <md-input-container class="md-block">
+         <label>Observacoes</label>
+        <textarea next-on-enter="btnFab" id="observacoes" name="observacoes" remove-acento ng-model="_ctrl.scope.clienteSelected.observacoes" columns="1" md-maxlength="255" rows="5" ng-blur="update('observacoes')"></textarea>
+    </md-input-container>
+</form>

@@ -1,0 +1,75 @@
+<div layout="column" style="height:100%;" style="background-color:#F6F6F6;">
+	<section class="file-explorer-header" style="background-color:#F6F6F6;">
+	</section>
+	<div class="file-explorer-content" flex style="background-color:#F6F6F6;">
+
+		<div layout="row" >
+
+
+			<md-tabs id="div-files-search" class="md-primary" md-dynamic-height md-selected="data.selectedIndex" md-align-tabs="top" flex="50">
+	          <md-tab id="tab1">
+	            <md-tab-label>Visualizador</md-tab-label>
+	            <md-tab-body >
+		            <md-cxontent class="file-explorer-content-left md-padding" layout="row" layout-align="center center" >
+		            	<div layout="row" class="md-whiteframe-2dp" style="height:460px;" flex="50">
+							<div layout="column" flex>
+								
+								<div  flex layout="column">
+									<panzoom style="background-color:white;" id="imagePan" config="panzoomConfig" model="panzoomModel" flex>
+									<img  src="c:/PharmaGed/Documentos Armazenados/FULANO ARLNADO JUNIOR 2_2015-12-17_17-11-20jpeg" 
+									>
+								</panzoom>
+								</div>
+							</div>
+						</div>
+						</md-content>
+		            </md-tab-body>
+		          </md-tab>
+		          <md-tab id="tab2">
+	            <md-tab-label>Detalhes</md-tab-label>
+	            <md-tab-body >
+		            <md-content class="file-explorer-content-left md-padding" layout="row" layout-align="center center" >
+		            	<div layout="row" class="md-whiteframe-2dp" style="height:510px;" flex="50">
+							Nome do arquivo: asdasd<br>
+							Data do Arquivo: asdasd<br>
+						</div>
+						</md-content>
+		            </md-tab-body>
+		          </md-tab>
+			</md-tabs>
+
+			<md-tabs id="div-files-search2" class="md-primary file-explorer-content-right" md-dynamic-height md-selected="data2.selectedIndex" md-align-tabs="top" flex="50" style="height:100%;">
+	          <md-tab id="tab3">
+	            <md-tab-label>DIGITALIZADOS</md-tab-label>
+	            <md-tab-body >
+		            <md-content class="file-explorer-content-left md-padding" layout="row" layout-align="center center" >
+		            	<div layout="row" class="md-whiteframe-2dp" style="height:100%;" flex>
+							{{files}}
+						</div>
+						</md-content>
+		            </md-tab-body>
+		          </md-tab>
+		          <md-tab id="tab4">
+	            <md-tab-label>CLIENTE</md-tab-label>
+	            <md-tab-body >
+		            <md-content class="file-explorer-content-left md-padding" layout="row" layout-align="center center" >
+		            	<div layout="row" class="md-whiteframe-2dp" style="height:510px;" flex="50">
+							
+						</div>
+						</md-content>
+		            </md-tab-body>
+		          </md-tab>
+			</md-tabs>
+
+		</div>
+
+	</div>
+	<div class="file-explorer-footer" layout="row" style="background-color:#F6F6F6;" layout-align="end end">
+		<md-button aria-label="Open Settings" ng-click="close()">
+            FECHAR
+        </md-button>
+        <md-button aria-label="Open Settings" class="md-accent md-raised" ng-click="showListBottomSheet($event)">
+            VINCULAR
+        </md-button>
+	</div>
+</div>

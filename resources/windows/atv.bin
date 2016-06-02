@@ -1,0 +1,9 @@
+{
+	"desktopFolder" : "c:/PharmaGed/Documentos Digitalizados",
+	"storeFolder" : "c:/PharmaGed/Documentos Armazenados",
+	"dbServer" : "127.0.0.1",
+	"dbName" : "pharmaged",
+	"dbUser" : "pharmaged",
+	"dbPass" : "@pharmaged123"
+	
+}

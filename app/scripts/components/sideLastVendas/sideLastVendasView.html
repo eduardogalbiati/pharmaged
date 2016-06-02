@@ -1,0 +1,39 @@
+<div layout="column" style="height:100%;background-color:#F6F6F6;padding:15px;"   class="side-menu" >
+  <div ng-animate=" 'side-menu-animate' " class="side-menu-item " ng-click="createVendaRequest()" ng-class="{'side-menu-item-active' :  _ctrl.scope.appContainer.elements.venda == false}" style="margin:0px;">
+     
+      <div layout="column" style="background-color:#F6F6F6;">
+        <md-button class="md-accent md-raised" style="margin:0;padding:10px;">
+          <div layout="row" layout-align="start center">
+          <div layout="column" layout-align="start center">
+            <ng-md-icon md-icon size="33"  icon="add_circle_outline" style="width:auto;height:auto;color:white;" ></ng-md-icon>
+            </div>
+            <div style="margin-left:5px;">Nova Venda</div>
+            
+            
+          </div>
+        </md-button>
+                 
+      </div>
+    </div>
+  <div style="" ng-animate=" 'side-menu-animate' " class="side-menu-item md-whiteframe-2dp"  ng-class="{'side-menu-item-active' : item.idVenda == _ctrl.scope.appContainer.elements.venda.idVenda}" ng-repeat="item in lastVendas" ng-click="selectVenda(item.idVenda)">
+    <div  class="side-menu-item-title" ng-class="{'side-menu-item-title-active' : item.idVenda == _ctrl.scope.appContainer.elements.venda.idVenda}">
+      {{item.dataHora | asDate | date:"dd/MM/yy HH:mm"}}
+    </div>
+    <div class="side-menu-item-content"   layout="column">
+      <div class="subheader">
+      {{item.nomeCliente}}<br>
+      </div>
+      <div layout="row">
+        <div style="padding:5px;">
+          {{item.cpf}}
+        </div>
+
+        <div flex  layout="row" layout-align="end center" class="side-menu-item-content">
+          <ng-md-icon md-icon icon="{{ item.files.documento ? 'check_box' : 'check_box_outline_blank'}}" ng-class="{ 'md-success-text' : item.files.documento, 'md-error-text' : !item.files.documento}"></ng-md-icon>
+          <ng-md-icon md-icon  icon="{{ item.files.receita ? 'check_box' : 'check_box_outline_blank'}}" ng-class="{ 'md-success-text' : item.files.documento, 'md-error-text' : !item.files.documento}"></ng-md-icon>
+          <ng-md-icon icon="{{ item.files.cupom ? 'check_box' : 'check_box_outline_blank'}}" ng-class="{ 'md-success-text' : item.files.documento, 'md-error-text' : !item.files.documento}"></ng-md-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,398 @@
+<div shortcut keypress-events layout="column">
+  <md-toolbar class="md-whiteframe-z2 site-content-toolbar searchToolbar">
+    <div class="md-toolbar-tools">
+     <md-button ng-click="sideNavOpen()" aria-label="Back">
+        <ng-md-icon icon="menu"></ng-md-icon>
+      </md-button>
+      <h3 flex="10">
+        Relatórios
+      </h3>
+         <div aria-label="Search" class="searchDiv" ng-click="setFocusAC()">
+        <ng-md-icon icon="search" class="searchIcon"></ng-md-icon>
+      </div>
+         <md-autocomplete md-autocomplete-clientes 
+            ng-disabled="ctrl.isDisabled"
+            md-no-cache="ctrl.noCache"
+            md-selected-item="ctrl.selectedItem"
+            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+            md-search-text="ctrl.searchText"
+            md-selected-item-change="ctrl.selectedItemChange(item)"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="item.display"
+            md-min-length="0"
+            md-input-id="acForSearch"
+            placeholder="Pesquisar..."
+            md-delay="500"
+            class="autocomplete-for-search input-uppercase" flex>
+          <md-item-template>
+            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+          </md-item-template>
+          <md-not-found >
+          <a ng-click="openNovoClienteDialog();">
+            Nenhum cliente encontrado utilizando: "{{ctrl.searchText}}".
+           </a>
+          </md-not-found>
+        </md-autocomplete>   
+      <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)" class="md-icon-button">
+        <ng-md-icon icon="more_vert"></ng-md-icon>
+      </md-button>
+
+    </div>
+  </md-toolbar>
+ 
+ <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+      <md-toolbar class="md-theme-indigo">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="sideNavClose()" class="md-icon-button" aria-label="Back" >
+            <ng-md-icon icon="arrow_back"></ng-md-icon>
+          </md-button>
+          <h1 class="md-toolbar-tools">PharmaGed</h1>
+        </div>
+      </md-toolbar>
+      <md-content layout-padding>
+
+        <ul  id="left_menu" class="menu-toggle-list">
+          <li>
+              <md-button ui-sref-active="inactive" href="#/clientes" ng-click="focusSection()" >Clientes</md-button>
+          </li>
+          <li>
+              <md-button  ui-sref-active="inactive" href="#/relatorio" ng-click="focusSection()" >Relatorios</md-button>
+          </li>
+        </ul>
+        <md-button ng-click="sideNavClose()" class="md-primary">
+          Fechar Menu
+        </md-button>
+      </md-content>
+    </md-sidenav>
+  </div>
+    
+	</div>
+
+  <!-- Acaba Toolbar -->
+   <div layout="row" flex ng-if="!clienteSelected">
+ 
+   </div>
+
+  <div layout="row" style="height:100%;" flex ng-if="clienteSelected">
+    <md-content class="md-whiteframe-z2 content-whiteframe" flex="25">
+      <md-toolbar class="md-toolbar-tools" layout="row">
+       
+        <md-input-container class="md-input-container-inverse" flex="50">
+          <label>De</label>
+          <input next-on-enter="fileFilterDataAte" id="nomeCliente" name="fileFilterDataDe" ng-model="fileFilter.dataDe" ui-mask="99/99/9999" ui-mask-placeholder-char="space" class="remove-placeholder">
+        </md-input-container>
+        <md-input-container class="md-input-container-inverse" flex="50" style="color:white;">
+          <label>Até</label>
+          <input id="fileFilterDataAte" name="fileFilterDataAte" ng-model="fileFilter.dataAte" ui-mask="99/99/9999" ui-mask-placeholder-char="space" class="remove-placeholder">
+        </md-input-container>
+
+      </md-toolbar>
+
+         <md-tabs md-center-tabs id="div-files-search" class="md-primary" md-dynamic-height md-selected="data.selectedIndex" md-align-tabs="top">
+          <md-tab id="tab1">
+            <md-tab-label>Arquivos</md-tab-label>
+            <md-tab-body >
+              <md-card ng-repeat="file in clientesArquivos | myDateFilter:fileFilter.dataDe:fileFilter.dataAte">
+                <img src="{{file.imagemVirtual}}" class="md-card-image" ng-click="openDialogImage(file)"/>
+
+                <md-card-content layout="row" layout-align="space-between">
+                    <span class="md-headline">{{file.dataUpload | date:'dd/MM/yyyy'}}</span>
+                    <md-button class="md-icon-button" aria-label="Share" ng-click="addToReport(file, 'clientesArquivos')">
+                      <ng-md-icon icon="add"></ng-md-icon>
+                    </md-button>
+                </md-card-content>
+              </md-card>
+            </md-tab-body>
+          </md-tab>
+           <md-tab id="tab2">
+            <md-tab-label>Cupons</md-tab-label>
+            <md-tab-body>
+              <md-card ng-repeat="file in clientesCupons | myDateFilter:fileFilter.dataDe:fileFilter.dataAte" >
+                <img src="{{file.imagemVirtual}}" class="md-card-image" ng-click="openDialogImage(file)"/>
+                <md-card-content layout="row" layout-align="space-between">
+                    <span class="md-headline">{{file.dataUpload | date:'dd/MM/yyyy'}}</span>
+                    <md-button class="md-icon-button" aria-label="Share" ng-click="addToReport(file, 'clientesCupons')">
+                      <ng-md-icon icon="add"></ng-md-icon>
+                    </md-button>
+                </md-card-content>
+              </md-card>
+            </md-tab-body>
+          </md-tab>
+          </md-tabs>
+      </md-content>
+      <div layout="column" flex="75">
+      <md-content class="md-padding" id="div-to-export-pdf-content" >
+
+<div id="div-to-export-pdf">
+  <html>
+    <head>
+      <style type="text/css">
+        .rotate-image-0{
+
+        }
+        .rotate-image-270 {
+          -webkit-transform: translateX(-100%) rotate(-90deg); /* Safari */
+          -moz-transform: translateX(-100%) rotate(-90deg); /* Firefox 3.6 Firefox 4 */
+          -ms-transform: translateX(-100%) rotate(-90deg); /* IE9 */
+          -o-transform: translateX(-100%) rotate(-90deg); /* Opera */
+          transform: translateX(-100%) rotate(-90deg); /* W3C */  
+          -webkit-transform-origin: top right;
+          -moz-transform-origin: top right;
+          -ms-transform-origin: top right;
+          -o-transform-origin: top right;
+          transform-origin: top right;
+        }
+        .rotate-image-180 {
+          -webkit-transform: translateX(-100%) rotate(-180deg); /* Safari */
+          -moz-transform: translateX(-100%) rotate(-180deg); /* Firefox 3.6 Firefox 4 */
+          -ms-transform: translateX(-100%) rotate(-180deg); /* IE9 */
+          -o-transform: translateX(-100%) rotate(-180deg); /* Opera */
+          transform: translateX(-100%) rotate(-180deg); /* W3C */  
+          -webkit-transform-origin: right;
+          -moz-transform-origin: right;
+          -ms-transform-origin: right;
+          -o-transform-origin: right;
+          transform-origin: right;
+        }
+        .rotate-image-90 {
+          -webkit-transform: translateY(-100%) rotate(90deg); /* Safari */
+          -moz-transform: translateY(-100%) rotate(90deg); /* FirefoY 3.6 FirefoY 4 */
+          -ms-transform: translateY(-100%) rotate(90deg); /* IE9 */
+          -o-transform: translateY(-100%) rotate(90deg); /* Opera */
+          transform: translateY(-100%) rotate(90deg); /* W3C */  
+          -webkit-transform-origin: bottom left;
+          -moz-transform-origin: bottom left;
+          -ms-transform-origin: bottom left;
+          -o-transform-origin: bottom left;
+          transform-origin: bottom left;
+          /*39% 65%*/
+        }
+        .rotate-image-360 {
+          
+        }
+        .pdf-front-page{
+          font-family:Roboto, 'Helvetica Neue', sans-serif;
+          width:1500px;
+          height:1935px;
+          /*margin:0px -10px -20px -20px;*/
+          color: #3F51B5;
+
+        }
+        .pdf-front-page .title{
+          font-size: 50px;
+          text-align: center;
+          margin-top: 675px;
+          margin-left:465px;
+          position:absolute;
+
+        }
+        .pdf-front-page .subtitle{
+          font-size: 25px;
+          text-align: center;
+          margin-top: 860px;
+          margin-left:540px;
+          position:absolute;
+        }
+        .pdf-front-page img{
+          font-size: 50px;
+          text-align: center;
+          margin-top: 275px;
+          margin-left:505px;
+          position:absolute;
+
+        }
+
+        .pdf-front-page .subject{
+          font-size: 40px;
+          text-align: center;
+          margin-top: 1250px;
+          margin-left:580px;
+          position:absolute;
+          font-weight: bold;
+
+        }
+
+        .pdf-front-page .autor{
+          font-size: 25px;
+          text-align: left;
+          font-weight: bold;
+          margin-top: 1800px;
+          margin-left:50px;
+          position:absolute;
+        }
+
+        .pdf-front-page .cliente{
+          font-size: 25px;
+          font-weight: bold;
+          text-align: right;
+          margin-top: 1800px;
+          margin-left:930px;
+          position:absolute;
+        }
+        .pdf-header{
+          margin:0px -10px 0px -20px;
+          background-color: #3F51B5;
+          height:100px;
+          width:1500px;
+          color:white;
+          font-family:Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        .pdf-header .title{
+          margin-left:105px;
+
+        }
+        .pdf-header .title .text{
+          font-size: 30px;
+          font-weight: bold;
+          margin-top: 21px;
+          position: absolute;
+        }
+        .pdf-header img{
+          margin-left:40px;
+          margin-top:5px;
+          width:55px;
+          position:absolute;
+        }
+
+        .pdf-content {
+          margin: 25px;
+          font-family:Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        .pdf-content .title{
+          font-size:25px;
+        }
+
+        .pdf-content .form-table {
+          width:100%;
+        }
+        .pdf-content .form-table .form-value {
+          margin-top:-15px;
+          font-size:23px;
+          font-weight:bold;
+        }
+
+        .pdf-content .form-table .form-label {
+          font-size:16px;
+        }
+
+        .pdf-content .doc-table {
+          width:100%;
+          position:absolute;
+        }
+
+        .page-control {
+          display:none;
+        }
+        .max-img-page-size{
+          max-height:1620px;
+          max-width:1380px;
+        }
+        .pdf-footer{
+          color:#3F51B5;
+          margin-top: 1690px;
+          position: absolute;
+
+        }
+        .pdf-footer .footer-pagination{
+          font-size:15px;
+          font-weight: bold;
+          font-family:Roboto, 'Helvetica Neue', sans-serif;
+          margin-left: 1290px;
+          text-align: right;
+          position: absolute;   
+          min-width: 100px;
+      
+        }
+        .pdf-footer .footer-cliente{
+          font-size:15px;
+          font-weight: bold;
+          font-family:Roboto, 'Helvetica Neue', sans-serif;
+          position: absolute;
+          min-width: 800px;
+
+        }
+
+
+      </style>
+    </head>
+    <body>
+      <div style="page-break-before:always;" class="pdf-page-size white-paper md-whiteframe-5dp">
+      <div class="pdf-front-page">
+        <img src="c:/Pharmaged/pdf-pill-inverse.jpg">
+         <div class="title">
+           <h1>PharmaGED</h1>
+        </div>
+         <div class="subtitle"> 
+            Gerenciador Eletrônico de Documentos
+          </div>
+          <div class="subject"> 
+            Dossiê de Vendas
+          </div>
+           <div class="cliente"> 
+            {{clienteSelected.nomeCliente}}<br>
+            CPF: {{clienteSelected.cpf}}
+          </div>
+           <div class="autor"> 
+            {{configFile.nomeEmpresa}} - CNPJ: {{configFile.cnpj}}<br>
+            Responsável: {{configFile.responsavel}}<br>
+          </div>
+      </div>
+      </div>
+    
+      <div style="page-break-before:always;" id="pdf-page" class="pdf-page-size white-paper md-whiteframe-5dp" ng-repeat="item in reportFiles track by $index">
+        <div class="pdf-header">
+          <br>
+          <img src="c:/Pharmaged/pdf-pill.jpg">
+          <div class="title">
+            <div class="text">PharmaGED
+            </div>
+            <div class="page-control">
+              <md-button ng-click="rotateImage($index)" aria-label="Back">
+                <ng-md-icon icon="rotate_right"></ng-md-icon>
+              </md-button>
+                <md-button ng-click="removeFromReport($index)" aria-label="Back">
+                <ng-md-icon icon="clear"></ng-md-icon>
+              </md-button>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="pdf-content">
+          <div class="title">Documentos</div>
+          <hr>
+          <br>
+          <img  src="{{item.src}}" class="rotate-image-{{item.rotate}} max-img-page-size" style="position:absolute;">
+           <div class="pdf-footer">
+            <span class="footer-cliente">{{clienteSelected.nomeCliente}}</span>
+            <span class="footer-pagination">Página {{($index+1)}}/{{getReportFilesCount()}}</span>
+
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
+</div>
+      </md-content>
+       </div>
+        <div class="lock-size fab-speed-dial" layout="row" layout-align="center right">
+            <md-fab-speed-dial md-open="fabReport.isOpen" md-direction="up" class="md-scale md-fab-bottom-right" ng-mouseenter="showFabReport()" ng-mouseleave="hideFabReport()">
+                <md-fab-trigger>
+                    <md-button id="btnFab" style="background-color:{{fabReport.primaryColor}};" ng-click="createPdf();" aria-label="Adicionar" class="md-fab md-fab-primary">
+                        <md-tooltip md-direction="left" md-visible="tooltipVisible">Gerar PDF</md-tooltip>
+                        <ng-md-icon icon="{{fabReport.primaryIcon}}" options=
+'{"duration": 375}'></ng-md-icon>
+                    </md-button>
+                </md-fab-trigger>
+                <md-fab-actions>
+                  
+                    
+                </md-fab-actions>
+          </md-fab-speed-dial>
+        </div>
+
+</div>
+
+ 

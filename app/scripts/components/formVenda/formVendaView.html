@@ -1,0 +1,77 @@
+    <div class="add-transition" layout="row" >
+        
+        <div flex>
+            <form name="userForm" class=" input-uppercase">
+                <div layout layout-sm="column"> 
+                    <md-input-container flex="15"> 
+                        <label>CPF </label> 
+                        <input next-on-enter="newClienteModalNomeCliente" id="newClienteModalCpf" ui-mask="999.999.999-99" ng-model="_ctrl.scope.newClienteModal.cpf" type="text" ng-blur="consultaCpf();" class="remove-placeholder"> 
+                    </md-input-container> 
+                    <md-input-container class="input-uppercase" flex ng-if="!newClienteModal.isNew" flex> 
+                        <label>Nome</label> 
+                        <input next-on-enter="telefone1" remove-acento id="newClienteModalNomeCliente"  ng-model="_ctrl.scope.newClienteModal.nomeCliente" type="text" flex> 
+                    </md-input-container flex> 
+                    <md-input-container class="input-uppercase input-container-with-autocomplete" flex ng-if="newClienteModal.isNew"> 
+                        <div search-cliente-form cliente-selected="_ctrl.scope.appContainer.elements.cliente" somente-nome="true" refresh-listener="refreshList"></div>
+                    </md-input-container> 
+                    <md-input-container flex="15" >
+                        <label>Telefone 1</label>
+                        <input next-on-enter="celular1" id="telefone1" name="telefone1" ui-mask="99 - 99999-999?9" ui-mask-placeholder-char="_" class="remove-placeholder"  ng-model="_ctrl.scope.appContainer.elements.cliente.tel" type="text">
+                    </md-input-container>
+                     <md-input-container flex="15" >
+                        <label>Telefone 2</label>
+                        <input next-on-enter="abrirVenda" id="celular1" name="celular1" ui-mask="99 - 99999-999?9" ui-mask-placeholder-char="_" class="remove-placeholder" ng-model="_ctrl.scope.appContainer.elements.cliente.cel1" type="text">
+                    </md-input-container>
+                    <div layout="column"  layout-align="right end">
+                    <label>&nbsp;</label>
+                        <md-button id="abrirVenda" ng-disabled="isVendaDisabled()" ng-click="abreVendaDialog()" class="md-primary" >
+                                               Abrir
+
+                        </md-button>  
+                    </div>
+                </div> 
+               <!--  <div layout layout-sm="column" ng-if="_ctrl.scope.exibeEmail">
+                    
+                   
+                    <md-input-container flex>
+                        <label>Email</label>
+                        <input next-on-enter="cep" id="email" name="email" remove-acento ng-model="_ctrl.scope.appContainer.elements.cliente.email" type="text"
+                    </md-input-container>
+                </div>
+                
+                <div layout layout-sm="column" ng-if="_ctrl.scope.exibeLocalizacao">
+                    <md-input-container>
+                        <label>Cep</label>
+                        <input next-on-enter="endereco" id="cep" name="cep" ng-model="_ctrl.scope.appContainer.elements.cliente.cep" type="text">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>Num/Complemento</label>
+                        <input next-on-enter="abrirVenda" id="endereco" name="endereco" remove-acento ng-model="_ctrl.scope.appContainer.elements.cliente.endereco" type="text">
+                    </md-input-container>
+                </div> -->
+                
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- 
+    <div layout layout-sm="column">
+        <md-input-container flex>
+            <md-checkbox next-on-enter="solicitarReceita" id="atualizarDados" name="atualizarDados" ng-true-value="'1'" ng-false-value="'0'" ng-model="_ctrl.scope.appContainer.elements.cliente.atualizarDados" ng-change="update('atualizarDados')">Atualizar dados?</md-checkbox>
+        </md-input-container>
+        <md-input-container md-no-float>
+            <md-checkbox next-on-enter="observacoes" id="solicitarReceita" name="solicitarReceita" ng-true-value="'1'" ng-false-value="'0'" ng-model="_ctrl.scope.appContainer.elements.cliente.solicitarReceita" ng-change="update('solicitarReceita')">Solicitar receita?</md-checkbox>
+        </md-input-container>
+    </div>
+    <md-input-container class="md-block">
+         <label>Observacoes</label>
+        <textarea next-on-enter="btnFab" id="observacoes" name="observacoes" remove-acento ng-model="_ctrl.scope.appContainer.elements.cliente.observacoes" columns="1" md-maxlength="255" rows="5" ng-blur="update('observacoes')"></textarea>
+    </md-input-container>
+</form>
+     -->

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <title>PharmaGed 2.8</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- build:css assets/css/app.css -->
+    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="../bower_components/angular-material-icons/angular-material-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../bower_components/AngularJS-Toaster/toaster.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- endbuild -->
+</head>
+<body >
+    <ng-view></ng-view>
+     <!-- build:js1 scripts/jquery.js -->
+    <script src="../bower_components/jquery/dist/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+    <!-- endbuild -->
+
+    <!-- build:js2 scripts/vendor.js -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.js"></script>
+    <script src="../bower_components/angular-material/angular-material.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="../bower_components/angular-material-icons/angular-material-icons.js"></script>
+    <script src="../bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="../bower_components/AngularJS-Toaster/toaster.js"></script>
+    <script src="../bower_components/svg-morpheus/compile/minified/svg-morpheus.js"></script>
+    <script src="../bower_components/ngstorage/ngStorage.js"></script>
+    <script src="../bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+    <script src="../bower_components/angularUtils-pagination/dirPagination.js"></script>
+    <script src="../bower_components/angular-ui-mask/dist/mask.js"></script>
+    <script src="../bower_components/hamsterjs/hamster.js" ></script>
+    <script src="../bower_components/angular-mousewheel/mousewheel.js"></script>
+    <script src="../bower_components/angular-pan-zoom/release/panzoom.min.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:app scripts/app.js -->
+
+    <script src="./scripts/app.js"></script>
+    <script src="./scripts/config.js"></script>
+    <script src="./scripts/app/services/appUtils.js"></script>
+    <script src="./scripts/router.js"></script>
+    <script src="./scripts/controller.js"></script>
+
+    <script src="./scripts/components/fileExplorer/fileExplorerDirective.js"></script>
+    <script src="./scripts/components/formCliente/formClienteDirective.js"></script>
+    <script src="./scripts/components/newCliente/newClienteDirective.js"></script>
+    <script src="./scripts/components/searchCliente/searchClienteDirective.js"></script>
+    <script src="./scripts/components/formVenda/formVendaDirective.js"></script>
+    <script src="./scripts/components/formVendaDocumentos/formVendaDocumentosDirective.js"></script>
+    <script src="./scripts/components/sideLastVendas/sideLastVendasDirective.js"></script>
+
+    <script src="./scripts/appContainer.js"></script>
+
+    <script src="./scripts/customer/ClientesController.js"></script>
+    <script src="./scripts/FilesService.js"></script>
+    <script src="./scripts/customer/ClientesActiveRecord.js"></script>
+    <script src="./scripts/customer/VendasActiveRecord.js"></script>
+    <script src="./scripts/customer/PdfReportService.js"></script>
+
+    <script src="./scripts/activation/ActivationController.js"></script>
+    <script src="./scripts/activation/ActivationService.js"></script>
+
+    <script src="./scripts/vendas/VendasController.js"></script>
+
+    <script src="./scripts/ErrorCheckService.js"></script>
+    <script src="./scripts/error/ErrorController.js"></script>
+    <!-- endbuild -->
+
+  <!-- testing where build brokens
+   <script src="./../build/scripts/jquery.js" onload="window.$ = window.jQuery = module.exports;" ></script>
+    <script src="./../build/scripts/vendor.js" onload="window.$ = window.jQuery = module.exports;" ></script>
+    <script src="./../build/scripts/app.js" onload="window.$ = window.jQuery = module.exports;" ></script>
+    -->
+</body>
+</html>
