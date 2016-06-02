@@ -1,0 +1,276 @@
+<div shortcut keypress-events layout="column" >
+  <md-toolbar class="md-whiteframe-z2 site-content-toolbar searchToolbar">
+    <div class="md-toolbar-tools">
+     <md-button ng-click="sideNavOpen()" aria-label="Back">
+        <ng-md-icon icon="menu"></ng-md-icon>
+      </md-button>
+      <h3 flex="10">
+        Clientes
+      </h3>
+         <div aria-label="Search" class="searchDiv" ng-click="setFocusAC()">
+        <ng-md-icon icon="search" class="searchIcon"></ng-md-icon>
+      </div>
+         <md-autocomplete md-autocomplete-clientes
+            ng-disabled="ctrl.isDisabled"
+            md-no-cache="ctrl.noCache"
+            md-selected-item="ctrl.selectedItem"
+            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+            md-search-text="ctrl.searchText"
+            md-selected-item-change="ctrl.selectedItemChange(item)"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="item.display"
+            md-min-length="0"
+            md-input-id="acForSearch"
+            placeholder="Pesquisar..."
+            md-delay="500"
+            class="autocomplete-for-search input-uppercase" flex>
+          <md-item-template>
+            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+          </md-item-template>
+          <md-not-found >
+          <a ng-click="openNovoClienteDialog();">
+            Nenhum cliente encontrado utilizando: "{{ctrl.searchText}}".
+           </a>
+          </md-not-found>
+        </md-autocomplete>
+      <md-button ng-click="openNovoClienteDialog();" aria-label="Adicionar Novo Cliente" class="md-icon-button">
+        <ng-md-icon icon="person_add"></ng-md-icon>
+      </md-button>
+      <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)" class="md-icon-button">
+        <ng-md-icon icon="more_vert"></ng-md-icon>
+      </md-button>
+
+    </div>
+  </md-toolbar>
+
+ <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+      <md-toolbar class="md-theme-indigo">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="sideNavClose()" class="md-icon-button" aria-label="Back" >
+            <ng-md-icon icon="arrow_back"></ng-md-icon>
+          </md-button>
+          <h1 class="md-toolbar-tools">PharmaGed</h1>
+        </div>
+      </md-toolbar>
+      <md-content layout-padding>
+
+        <ul  id="left_menu" class="menu-toggle-list">
+          <li>
+              <md-button ui-sref-active="inactive" ui-sref="#/clientes" ng-click="focusSection()" >Clientes</md-button>
+          </li>
+          <li>
+              <md-button  ui-sref-active="inactive" href="#/relatorio" ng-click="focusSection()" >Relatorios</md-button>
+          </li>
+        </ul>
+        <md-button ng-click="sideNavClose()" class="md-primary">
+          Fechar Menu
+        </md-button>
+      </md-content>
+    </md-sidenav>
+	</div>
+
+  <!-- Acaba Toolbar -->
+   <div layout="row" flex ng-if="!clienteSelected">
+   
+   </div>
+
+  <div layout="row"  style="height:100%;" flex ng-if="clienteSelected">
+    <md-content layout="column" flex="55" class="md-padding" >
+      <md-whiteframe class="md-whiteframe-5dp" >
+        <md-subheader >
+          <span>Ficha Cadastral</span>
+
+
+        </md-subheader>
+        <md-divider></md-divider>
+        <md-content >
+          <form name="userForm" class="padding-medium input-uppercase">
+            <md-input-container class="md-block" flex>
+                <label>Nome</label>
+                <input next-on-enter="telefone1" remove-acento id="nomeCliente" name="nomeCliente" ng-model="clienteSelected.nomeCliente" type="text" ng-blur="checkIfHaveToLoad('nomeCliente');update('nomeCliente');" next-on-enter="tel1" >
+            </md-input-container>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Telefone</label>
+                    <input next-on-enter="celular1" id="telefone1" name="telefone1" ui-mask="99 - 99999-999?9" ui-mask-placeholder-char="_" class="remove-placeholder" name="tel1" id="tel" ng-model="clienteSelected.tel" type="text" ng-blur="update('tel')">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Celular 1</label>
+                    <input next-on-enter="celular2" id="celular1" name="celular1" ui-mask="99 - 99999-999?9" ui-mask-placeholder-char="_" class="remove-placeholder" ng-model="clienteSelected.cel1" type="text" ng-blur="update('cel1')">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Celular 2</label>
+                    <input next-on-enter="cpf" id="celular2" name="celular2" ui-mask="99 - 99999-999?9" ui-mask-placeholder-char="_" class="remove-placeholder" ng-model="clienteSelected.cel2" type="text" ng-blur="update('cel2')">
+                </md-input-container>
+            </div>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>CPF</label>
+                    <input next-on-enter="rg" id="cpf" name="cpf" ui-mask="999.999.999-99" ui-mask-placeholder-char="_" class="remove-placeholder" ng-model="clienteSelected.cpf" type="text" ng-blur="update('cpf')">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>RG</label>
+                    <input next-on-enter="dtNascimento" id="rg" name="rg" ng-model="clienteSelected.rg" type="text" ng-blur="update('rg')">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Nascimento</label>
+                    <input next-on-enter="email" id="dtNascimento" name="dtNascimento" ng-model="clienteSelected.dataNascimento" type="date" ng-blur="update('dataNascimento')">
+                </md-input-container>
+            </div>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Email</label>
+                    <input next-on-enter="cep" id="email" name="email" remove-acento ng-model="clienteSelected.email" type="text" ng-blur="update('email')">
+                </md-input-container>
+                <md-input-container>
+                    <label>Cep</label>
+                    <input next-on-enter="endereco" id="cep" name="cep" ng-model="clienteSelected.cep" type="text" ng-blur="update('cep')">
+                </md-input-container>
+            </div>
+            <div layout layout-sm="column">
+                <md-input-container class="md-block" flex>
+                    <label>Endereço</label>
+                    <input next-on-enter="bairro" id="endereco" name="endereco" remove-acento ng-model="clienteSelected.endereco" type="text" ng-blur="update('endereco')">
+                </md-input-container>
+            </div>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Bairro</label>
+                    <input next-on-enter="cidade" id="bairro" name="bairro" ng-model="clienteSelected.bairro" type="text" ng-blur="update('bairro')">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Cidade</label>
+                    <input next-on-enter="estado" id="cidade" name="cidade" ng-model="clienteSelected.cidade" type="text" ng-blur="update('cidade')">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Estado</label>
+                    <input next-on-enter="atualizarDados" id="estado" name="estado" ng-model="clienteSelected.uf" type="text" ng-blur="update('uf')">
+                </md-input-container>
+            </div>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <md-checkbox next-on-enter="solicitarReceita" id="atualizarDados" name="atualizarDados" ng-true-value="'1'" ng-false-value="'0'" ng-model="clienteSelected.atualizarDados" ng-change="update('atualizarDados')">Atualizar dados?</md-checkbox>
+                </md-input-container>
+                <md-input-container md-no-float>
+                    <md-checkbox next-on-enter="observacoes" id="solicitarReceita" name="solicitarReceita" ng-true-value="'1'" ng-false-value="'0'" ng-model="clienteSelected.solicitarReceita" ng-change="update('solicitarReceita')">Solicitar receita?</md-checkbox>
+                </md-input-container>
+            </div>
+            <md-input-container class="md-block">
+                 <label>Observacoes</label>
+                <textarea next-on-enter="btnFab" id="observacoes" name="observacoes" remove-acento ng-model="clienteSelected.observacoes" columns="1" md-maxlength="255" rows="5" ng-blur="update('observacoes')"></textarea>
+            </md-input-container>
+
+        </form>
+        </md-content>
+        </md-whiteframe>
+        <div layout="column" flex id="content">
+            <toaster-container  toaster-options="{'time-out': 1000, 'close-button':false, 'animation-class': 'toast-top-right','mouseover-timer-stop': true}"></toaster-container>
+        </div>
+        </md-content>
+        <md-content layout="column" flex class="md-padding">
+
+          <md-mark-for-toast></md-mark-for-toast>
+          <md-whiteframe class="md-whiteframe-5dp">
+
+            <div class="div-subheader" layout="row">
+              <div class="div-subheader-text" flex>Arquivos</div>
+              <div class="panzoom-image-control" ng-if="imgToOpen">
+                <md-button ng-click="rotateImagePanzoom()" aria-label="Back">
+                  <ng-md-icon icon="rotate_right"></ng-md-icon>
+                </md-button>
+                 <md-button ng-click="openDialogImage(imgToOpen)" aria-label="Back">
+                  <ng-md-icon icon="aspect_ratio"></ng-md-icon>
+                </md-button>  
+                 <md-button ng-click="clearImgToOpen()" aria-label="Back">
+                  <ng-md-icon icon="clear"></ng-md-icon>
+                </md-button>
+              </div>
+
+            </div>
+            <md-divider></md-divider>
+            <md-content ng-if="imgToOpen" class="image-pan-zoom">
+
+              <panzoom id="imagePan" config="panzoomConfig" model="panzoomModel" style="width:100%; height: 350px; ">
+                <img class="rotate-image-{{imgRotate}}" src="{{imgToOpen.imagemVirtual}}"  style="position:absolute;" class="ng-scope"/>
+              </panzoom>
+
+            </md-content>
+
+             <md-grid-list class="file-grid-list"
+                md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+                md-row-height-gt-md="1:1" md-row-height="2:2"
+                md-gutter="12px" md-gutter-gt-sm="8px" >
+                  <md-grid-tile class="gray" ng-repeat="file in clientesArquivos" ng-click="openImage(file)" style="cursor:pointer;">
+                      <img src="{{file.imagemVirtual}}" class="cover" />
+                  </md-grid-tile>
+                </md-grid-list>
+				<div class="md-subhead file-not-found" ng-if="clientesArquivos == ''" flex>Nenhum arquivo adicionado</div>
+
+          </md-whiteframe>
+          <br>
+           <md-whiteframe class="md-whiteframe-5dp">
+            <div class="div-subheader" layout="row">
+              <div class="div-subheader-text" flex>Cupons</div>
+              <div class="panzoom-image-control" ng-if="cupomToOpen">
+                <md-button ng-click="rotateCupomPanzoom()" aria-label="Back">
+                  <ng-md-icon icon="rotate_right"></ng-md-icon>
+                </md-button>
+                 <md-button ng-click="openDialogImage(cupomToOpen)" aria-label="Back">
+                  <ng-md-icon icon="aspect_ratio"></ng-md-icon>
+                </md-button>  
+                 <md-button ng-click="clearCupomToOpen()" aria-label="Back">
+                  <ng-md-icon icon="clear"></ng-md-icon>
+                </md-button>
+              </div>
+
+            </div>
+            <md-divider></md-divider>
+            <md-content ng-if="cupomToOpen" class="image-pan-zoom">
+
+              <panzoom id="cupomPan" config="panzoomConfig" model="panzoomModel" style="width:100%; height: 350px; ">
+                <img class="rotate-image-{{cupomRotate}}" src="{{cupomToOpen.imagemVirtual}}" style="position:absolute;" class="ng-scope"/>
+              </panzoom>
+
+            </md-content>
+
+             <md-grid-list class="file-grid-list"
+                md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+                md-row-height-gt-md="1:1" md-row-height="2:2"
+                md-gutter="12px" md-gutter-gt-sm="8px" >
+                <md-grid-tile class="gray" ng-repeat="file in clientesCupons" ng-click="openCupom(file)" style="cursor:pointer;">
+                      <img src="{{file.imagemVirtual}}" class="cover" />
+                  </md-grid-tile>
+                </md-grid-list>
+                <div class="md-subhead file-not-found" ng-if="clientesCupons == ''" flex>Nenhum cupom adicionado</div>
+          </md-whiteframe>
+
+        </md-content>
+        <div class="lock-size fab-speed-dial" layout="row" layout-align="center right">
+            <md-fab-speed-dial md-open="fab.isOpen" md-direction="up" class="md-scale md-fab-bottom-right" ng-mouseenter="showFab()" ng-mouseleave="hideFab()">
+                <md-fab-trigger>
+                    <md-button id="btnFab" style="background-color:{{fab.primaryColor}};" ng-click="openNovoClienteDialog();" aria-label="Adicionar" class="md-fab md-fab-primary">
+                        <md-tooltip md-direction="left" md-visible="tooltipVisible">Adicionar Cliente</md-tooltip>
+                        <ng-md-icon icon="{{fab.primaryIcon}}" options=
+'{"duration": 375}'></ng-md-icon>
+                    </md-button>
+                </md-fab-trigger>
+                <md-fab-actions>
+                    <md-button ng-if="clienteSelected" ng-click="openFileDialog('documento')" aria-label="Documento / Receita" class="md-fab md-raised md-mini">
+                        <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">
+                            Adicionar Documento
+                        </md-tooltip>
+                        <ng-md-icon icon="attach_file"></ng-md-icon>
+                    </md-button>
+                    <md-button ng-if="clienteSelected" ng-click="openFileDialog('cupom')" aria-label="Cupom Fiscal" class="md-fab md-raised md-mini">
+                        <ng-md-icon icon="theaters"></ng-md-icon>
+                        <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">
+                            Adicionar Cupom Fiscal
+                        </md-tooltip>
+                    </md-button>
+                    <!--setDomFocus('newClienteModalCpf')-->
+
+                </md-fab-actions>
+          </md-fab-speed-dial>
+        </div>
+
+</div>

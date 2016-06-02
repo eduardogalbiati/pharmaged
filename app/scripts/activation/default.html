@@ -1,0 +1,60 @@
+<div  layout="column" ng-controller="ActivationController">
+  <md-toolbar class="md-whiteframe-z2 site-content-toolbar searchToolbar" ng-show="!showSearch">
+    <div class="md-toolbar-tools">
+     <md-button ng-click="sideNavOpen()" aria-label="Back">
+        <ng-md-icon icon="menu"></ng-md-icon>
+      </md-button>
+      <h3 flex>
+        Ativação do Produto
+      </h3>
+      <h3>
+        Status:<span ng-if="status == 1">Ativado!</span><span ng-if="status == 0"> Inativo</span>
+      </h3>
+     
+      <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+        <ng-md-icon icon="more_vert"></ng-md-icon>
+      </md-button>
+
+    </div>
+  </md-toolbar>
+  
+  <div layout="row" flex  style="background-color:#669CF5;height:1000px">
+    <md-content layout="row" flex class="md-padding"  layout-align="center start">
+          <md-whiteframe class="md-whiteframe-5dp"   style="padding:25px;background-color:rgb(255,255,255)">
+            <form>
+              <div layout-sm="column">
+                  Para obter sua licença, entre em contato com<br><br>
+              </div>
+              <div layout-sm="column">
+                  <span style="font-weight:bold;">Eduardo Galbiati</span><br>
+              </div>
+              <div layout-sm="column">
+                  (14) 99814-5025<br>
+                  eduardo.galbiati7@gmail.com<br>
+              </div>
+              <br>
+              <div layout-sm="column">
+                  Informe o código de instalação abaixo<br>
+              </div>
+              <div layout-align="center start" style="text-align:center;" layout-sm="column">
+                <h4>{{codigoInstalacao}}</h4>
+              </div>
+              <div  layout-sm="column">
+                Insira o código de ativação recebido
+              </div>
+              <md-input-container class="md-block" flex>
+                <label>Código de Ativação</label>
+                <input id="nomeCliente" name="nomeCliente" ng-model="codigoAtivacao" type="text">
+              </md-input-container>
+              <md-content layout="row" layout-align="center start">
+                <md-button  ng-disabled="false" ng-click="putCodigoAtivacao();" class="md-primary" flex>Ativar!</md-button>
+             </md-content>
+            </form>
+          
+          </md-whiteframe>
+
+        </md-content>
+  </div>
+</div>
+
+ 

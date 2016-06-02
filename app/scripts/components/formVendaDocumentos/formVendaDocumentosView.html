@@ -1,0 +1,84 @@
+<div layout="row" layout-align="space-around center" >
+
+	<div flex="25" layout="column" layout-align="center center">
+		
+		<div  class="md-whiteframe-5dp" style="background-color:white;" layout="column">
+		<div style="background-color:#3F51B5;color:white;" layout="row" >
+				<div  flex>
+				<md-button class="slim-button" ng-click="sideNavOpen()" aria-label="Back">
+			        <ng-md-icon icon="add"></ng-md-icon>Identificação
+			     </md-button>
+				</div>
+				<md-button class="slim-button" ng-click="sideNavOpen()" aria-label="Back">
+			        <ng-md-icon icon="more_vert"></ng-md-icon>
+			     </md-button>
+			</div>
+			<div  style="padding:10px;"  ng-class="{'div-image-none' : arqDocumentos == 0}">
+				<img ng-repeat="item in arqDocumentos" src="{{item.caminho+'/'+item.nomeArquivo}}" style="max-width:100%;">
+				<div ng-if="arqDocumentos == 0" style="width:237px;height:330px;display:flex;" layout-align="center center" layout="column" ng-click="openFileExplorer();">
+					<div layout-align="center center">
+						<md-icon size="66" ng-md-icon icon="add_circle_outline" class="form-icon-span" style="width:auto;height:auto;" ></md-icon>
+						<div class="newfile-text">Adicionar</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div flex="25" layout="column" layout-align="center center">
+		
+		<div  class="md-whiteframe-5dp" style="background-color:white;" layout="column">
+		<div style="background-color:#3F51B5;color:white;" layout="row" >
+				<div  flex>
+				<md-button class="slim-button" ng-click="sideNavOpen()" aria-label="Back">
+			        <ng-md-icon icon="add"></ng-md-icon>Receitas
+			     </md-button>
+				</div>
+				<md-button class="slim-button" ng-click="sideNavOpen()" aria-label="Back">
+			        <ng-md-icon icon="more_vert"></ng-md-icon>
+			     </md-button>
+			</div>
+			<div  style="padding:10px;"  ng-class="{'div-image-none' : arqReceitas == 0}">
+				<img ng-repeat="item in arqReceitas" src="{{item.caminho+'/'+item.nomeArquivo}}" style="max-width:100%;">
+				<div ng-if="arqReceitas == 0" style="width:237px;height:330px;display:flex;" layout-align="center center" layout="column">
+					<div layout-align="center center">
+						<md-icon size="66" ng-md-icon icon="add_circle_outline" class="form-icon-span" style="width:auto;height:auto;" ></md-icon>
+						<div class="newfile-text">Adicionar</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<div flex="25" layout="column" layout-align="center center">
+		
+		<div  class="md-whiteframe-5dp" style="background-color:white;" layout="column">
+		<div style="background-color:#3F51B5;color:white;" layout="row" >
+				<div  flex>
+				<md-button class="slim-button" ng-click="sideNavOpen()" aria-label="Back">
+			        <ng-md-icon icon="add"></ng-md-icon>Cupom
+			     </md-button>
+				</div>
+				<md-button class="slim-button" ng-click="sideNavOpen()" aria-label="Back">
+			        <ng-md-icon icon="more_vert"></ng-md-icon>
+			     </md-button>
+			</div>
+
+
+			<div  style="padding:10px;"  ng-class="{'div-image-none' : arqCupons == 0}">
+
+				<img ng-repeat="item in arqCupons" src="{{item.caminho+'/'+item.nomeArquivo}}" style="max-width:100%;">
+
+				<div ng-if="arqCupons == 0" style="width:237px;height:330px;display:flex;" layout-align="center center" layout="column">
+					<div layout-align="center center">
+						<md-icon size="66" ng-md-icon icon="add_circle_outline" class="form-icon-span" style="width:auto;height:auto;" ></md-icon>
+						<div class="newfile-text">Adicionar</div>
+					</div>
+				</div>
+
+			</div>
+			
+		</div>
+	</div>
+</div>

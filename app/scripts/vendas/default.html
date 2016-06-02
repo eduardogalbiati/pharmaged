@@ -1,0 +1,39 @@
+  <md-toolbar class="md-whiteframe-z2 site-content-toolbar searchToolbar" ng-show="!showSearch">
+    <div class="md-toolbar-tools">
+     <md-button ng-click="sideNavOpen()" aria-label="Back">
+        <ng-md-icon icon="menu"></ng-md-icon>
+      </md-button>
+      <h3 flex>
+        Ativação do Produto
+      </h3>
+      <h3>
+        
+      </h3>
+      <div new-cliente sonar-to="refreshList" cliente-selected="cliente"></div>
+      <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+        <ng-md-icon icon="more_vert"></ng-md-icon>
+      </md-button>
+
+    </div>
+  </md-toolbar>
+  <div style="height:100%;" layout="row" >
+    <md-content flex="20" class="md-whiteframe-3dp" layout="row">
+
+      <side-last-vendas app-container="appContainer"  flex></side-last-vendas>
+    </md-content>
+      <md-content class="add-transition" layout="column" flex>
+      
+          <md-whiteframe class="add-transition md-whiteframe-3dp md-padding"  style="background-color:rgb(255,255,255)" >
+              <div form-venda app-container="appContainer"></div>  
+          </md-whiteframe>
+          <md-whiteframe class="add-transition  md-padding"  style="margin-top:25px;" ng-if="appContainer.elements.venda != false">
+              <div form-venda-documentos app-container="appContainer" style="margin-top:15px;"></div>
+          </md-whiteframe>
+
+      </md-content>
+
+      
+  </div>
+
+
+ 
