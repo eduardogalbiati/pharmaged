@@ -33,4 +33,18 @@
   - Gerando PDF para auditoria
   ![alt tag](https://raw.githubusercontent.com/eduardogalbiati/pharmaged/develop/docs/img/relatorio.gif)
   
-  
+### Desenvolvimento
+  - Instalando
+```sh
+$ npm install
+$ bower install
+```
+ - Rodando
+```sh
+$ cd app
+$ electron .
+```
+ - Build
+```sh
+$ gulp build
+```
